@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.local
+studio/node_modules/
+studio/dist/
+studio/.sanity/
+.migration-backup/
+.migration-backup.zip
+artifacts/
