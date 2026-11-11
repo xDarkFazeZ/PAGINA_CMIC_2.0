@@ -143,7 +143,6 @@ const useMediaQuery = (query: string) => {
 /* ===================== COMPONENTE PRINCIPAL ===================== */
 export default function IcicHighlight() {
   const [icicImages, setIcicImages] = useState<GalleryItem[]>([]);
-  const [calendarImage, setCalendarImage] = useState<GalleryItem | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [status, setStatus] = useState("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
@@ -182,23 +181,10 @@ export default function IcicHighlight() {
           "descripcion": select(defined(descripcion[0].children[0].text) => descripcion[0].children[0].text, "")
         }`;
 
-        const calendarQuery = /* groq */ `*[_type == "calendarioCursos"][0]{
-          _id, titulo, imagen,
-          "descripcion": select(defined(descripcion[0].children[0].text) => descripcion[0].children[0].text, "")
-        }`;
-
-        const [galleryData, calendarData] = await Promise.all([
-          client.fetch<GalleryDocument[]>(galleryQuery, {}, { signal, timeout: 8000 }),
-          client.fetch<GalleryDocument | null>(calendarQuery, {}, { signal, timeout: 8000 }),
-        ]);
-
+        const galleryData = await client.fetch<GalleryDocument[]>(galleryQuery, {}, { signal, timeout: 8000 });
         const gallery = sanitizeData(galleryData);
-        const calSanRaw = calendarData ? sanitizeData([calendarData])[0] : null;
-        const calSan = calSanRaw?.img ? calSanRaw : null;
-
         setIcicImages(gallery);
-        setCalendarImage(calSan);
-        setStatus(gallery.length || calSan ? "ok" : "empty");
+        setStatus(gallery.length ? "ok" : "empty");
       } catch (err) {
         if (signal?.aborted) return;
         console.error("[ICIC] Error de carga:", err);
@@ -318,26 +304,6 @@ export default function IcicHighlight() {
     );
   }, [icicImages, currentSlide, stopCarousel, startCarousel, handlePrevSlide, handleNextSlide]);
 
-  // ✅ MEMOIZADO: Sección de calendario
-  const calendarSection = useMemo(() => {
-    if (!calendarImage) return null;
-    
-    return (
-      <div className={cmicClasses("calendar-section")}>
-        <h4>{calendarImage.titulo || "Calendario de Cursos"}</h4>
-        <div className={cmicClasses("calendar-preview")}>
-          <ImageOrNothing
-            src={calendarImage.img}
-            alt={calendarImage.titulo || "Calendario de Cursos"}
-            className={cmicClasses("calendar-image")}
-            width={1000} // ✅ Reducido
-            height={750} // ✅ Reducido
-          />
-        </div>
-      </div>
-    );
-  }, [calendarImage]);
-
   /* ===================== RENDERIZADO CONDICIONAL ===================== */
   if (status === "loading" || status === "idle") {
     return (
@@ -410,7 +376,6 @@ export default function IcicHighlight() {
           <div className={cmicClasses("icic-gallery")}>
             <h3>Nuestros estudiantes en acción</h3>
             {carouselContent}
-            {calendarSection}
           </div>
         </div>
       </div>

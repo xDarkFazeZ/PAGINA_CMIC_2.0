@@ -114,19 +114,26 @@ export default function Afiliados() {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
     let lastTime = 0;
-    let direction = 1;
     let position = gallery.scrollLeft;
     let paused = false;
+    let loopWidth = 0;
+    const measure = () => {
+      const first = gallery.querySelector<HTMLElement>('[data-loop-start="0"]');
+      const repeated = gallery.querySelector<HTMLElement>('[data-loop-start="1"]');
+      // Include the column gap so both copies line up exactly at the seam.
+      loopWidth = first && repeated
+        ? repeated.getBoundingClientRect().left - first.getBoundingClientRect().left : 0;
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(gallery);
+    measure();
     const animate = (time: number) => {
       const elapsed = lastTime ? Math.min(time - lastTime, 50) : 0;
       lastTime = time;
       if (!paused && !motion.matches && !document.hidden) {
-        const end = gallery.scrollWidth - gallery.clientWidth;
-        if (end > 0) {
-          position = Math.max(0, Math.min(end, position + direction * elapsed * 0.025));
+        if (loopWidth > 0) {
+          position = (position + elapsed * 0.025) % loopWidth;
           gallery.scrollLeft = position;
-          if (position >= end) direction = -1;
-          if (position <= 0) direction = 1;
         }
       } else {
         position = gallery.scrollLeft;
@@ -145,6 +152,7 @@ export default function Afiliados() {
     frame = requestAnimationFrame(animate);
     return () => {
       cancelAnimationFrame(frame);
+      observer.disconnect();
       gallery.removeEventListener('pointerenter', pause);
       gallery.removeEventListener('pointerleave', resume);
       gallery.removeEventListener('focus', pause);
@@ -243,18 +251,26 @@ export default function Afiliados() {
       );
     }
 
+    // Even groups preserve the two-row order at every seam, including odd totals.
+    const copiesPerGroup = Math.ceil(Math.max(8, afiliados.length) / afiliados.length);
+    const evenCopies = afiliados.length % 2 && copiesPerGroup % 2
+      ? copiesPerGroup + 1 : copiesPerGroup;
+    const group = Array.from({ length: evenCopies }, () => afiliados).flat();
+
     return (
       <div id="afiliados-gallery" ref={galleryRef}
         className={cmicClasses("affiliate-gallery")} tabIndex={0}
         role="region" aria-label="Empresas afiliadas. Galería automática; se pausa al interactuar.">
-        {afiliados.map((a) => (
-          <div key={a.id} className={cmicClasses("affiliate-card")}>
+        {[0, 1, 2].flatMap((copy) => group.map((a, index) => (
+          <div key={`${copy}-${index}-${a.id}`} className={cmicClasses("affiliate-card")}
+            data-loop-start={index === 0 ? copy : undefined}
+            aria-hidden={copy > 0 || index >= afiliados.length ? true : undefined}>
             <div className={cmicClasses("affiliate-logo")}>
               <SafeImage logo={a.logo} name={a.nombre} width={220} height={100} />
             </div>
             <span className={cmicClasses("affiliate-name")}>{a.nombre}</span>
           </div>
-        ))}
+        )))}
       </div>
     );
   }, [status, afiliados]);

@@ -301,6 +301,7 @@ const recipes: Record<string, string> = {
     String.raw`tw:[&_.icic-highlight]:[margin-block:0] tw:[&_.icic-highlight]:[padding-top:clamp(3rem,5vw,4.5rem)] tw:[&_.icic-highlight]:[padding-bottom:var(--home-section-space)] tw:[&_.icic-header]:[margin-bottom:2.5rem] tw:[&_.icic-logo-container]:flex tw:[&_.icic-logo-container]:justify-center tw:[&_.icic-logo-container]:[margin:0_0_1rem]`,
     String.raw`tw:[&_.icic-logoHead]:block tw:[&_.icic-logoHead]:[width:clamp(180px,24vw,280px)] tw:[&_.icic-logoHead]:[height:auto] tw:[&_.icic-logoHead]:[padding:0] tw:[&_.icic-logoHead]:[margin:0_auto]! tw:[&_.icic-highlight_.section-title]:[margin-top:0] tw:[&_.icic-grid]:[gap:2rem]`,
     String.raw`tw:[&_.ng-wrapper]:[margin-block:0] tw:[&_.ng-wrapper]:[padding-block:var(--home-section-space)] tw:max-640:[&_.icic-header]:[margin-bottom:2rem] tw:max-640:[&_.icic-grid]:[gap:1.5rem]`,
+    String.raw`tw:[&_.icic-gallery]:[gap:1rem] tw:[&_.icic-gallery_>_h3]:[margin-bottom:0] tw:[&_.icic-gallery_.carousel-container]:[height:auto] tw:[&_.icic-gallery_.carousel-container]:[aspect-ratio:12/7] tw:[&_.icic-gallery_.carousel-slide]:items-start tw:[&_.icic-gallery_.carousel-image]:[object-position:top]`,
   ].join(' '),
   // App
   "text-titulo": [
