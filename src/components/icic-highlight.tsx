@@ -72,21 +72,6 @@ const ImageOrNothing = React.memo(({ src, alt = "", className, onError, ...props
 });
 
 // ✅ COMPONENTES MEMOIZADOS PARA UI
-const StatsGrid = React.memo(() => (
-  <div className={cmicClasses("stats-grid")} role="region" aria-label="Estadísticas del instituto">
-    {[
-      { number: "50+", label: "Cursos disponibles" },
-      { number: "2,000+", label: "Estudiantes capacitados" },
-      { number: "98%", label: "Tasa de satisfacción" }
-    ].map((stat, index) => (
-      <div key={index} className={cmicClasses("stat")}>
-        <span className={cmicClasses("stat-number")}>{stat.number}</span>
-        <span className={cmicClasses("stat-label")}>{stat.label}</span>
-      </div>
-    ))}
-  </div>
-));
-
 const FeaturesGrid = React.memo(() => (
   <div className={cmicClasses("features-grid")} role="region" aria-label="Características del instituto">
     {[
@@ -408,7 +393,6 @@ export default function IcicHighlight() {
                 nacional e internacional.
               </p>
 
-              <StatsGrid />
             </div>
 
             <FeaturesGrid />

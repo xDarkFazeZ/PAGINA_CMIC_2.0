@@ -294,7 +294,13 @@ const recipes: Record<string, string> = {
   ].join(' '),
   // App
   "site-home": [
-    String.raw`tw:[padding-top:var(--site-header-height)]`,
+    String.raw`tw:[padding-top:var(--site-header-height)] tw:[--home-section-space:clamp(2.5rem,5vw,4rem)]`,
+    // Keep home section spacing in normal flow, without viewport-sized gaps or negative margins.
+    String.raw`tw:[&_.affiliate-section]:[padding-block:var(--home-section-space)] tw:[&_.convenios.logos-only]:[min-height:0] tw:[&_.convenios.logos-only]:[margin-block:0] tw:[&_.convenios.logos-only]:[padding-block:var(--home-section-space)]`,
+    String.raw`tw:[&_.courses-section]:[padding-top:var(--home-section-space)]! tw:[&_.courses-section]:[padding-bottom:1rem]! tw:[&_.courses-section]:[margin-block:0]! tw:[&_.see-more]:[margin-top:2rem]`,
+    String.raw`tw:[&_.icic-highlight]:[margin-block:0] tw:[&_.icic-highlight]:[padding-top:clamp(3rem,5vw,4.5rem)] tw:[&_.icic-highlight]:[padding-bottom:var(--home-section-space)] tw:[&_.icic-header]:[margin-bottom:2.5rem] tw:[&_.icic-logo-container]:flex tw:[&_.icic-logo-container]:justify-center tw:[&_.icic-logo-container]:[margin:0_0_1rem]`,
+    String.raw`tw:[&_.icic-logoHead]:block tw:[&_.icic-logoHead]:[width:clamp(180px,24vw,280px)] tw:[&_.icic-logoHead]:[height:auto] tw:[&_.icic-logoHead]:[padding:0] tw:[&_.icic-logoHead]:[margin:0_auto]! tw:[&_.icic-highlight_.section-title]:[margin-top:0] tw:[&_.icic-grid]:[gap:2rem]`,
+    String.raw`tw:[&_.ng-wrapper]:[margin-block:0] tw:[&_.ng-wrapper]:[padding-block:var(--home-section-space)] tw:max-640:[&_.icic-header]:[margin-bottom:2rem] tw:max-640:[&_.icic-grid]:[gap:1.5rem]`,
   ].join(' '),
   // App
   "text-titulo": [
@@ -542,6 +548,21 @@ const recipes: Record<string, string> = {
   "convenios-loading": [
     String.raw`tw:text-center tw:[padding-top:3rem] tw:[padding-right:1.5rem] tw:[padding-bottom:3rem] tw:[padding-left:1.5rem] tw:[font-size:1.05rem] tw:[color:var(--muted)] tw:[font-family:var(--texto)]`,
   ].join(' '),
+  "affiliate-section": [
+    String.raw`tw:[padding:5rem_1.5rem] tw:[background:#f7f7f5] tw:[border-block:1px_solid_#e9e7e3] tw:max-640:[padding:3rem_1rem]`,
+  ].join(' '),
+  "affiliate-inner": String.raw`tw:[max-width:1200px] tw:mx-auto tw:min-w-0`,
+  "affiliate-heading": [
+    String.raw`tw:text-center tw:[margin-bottom:2rem] tw:[&_h2]:[font-family:var(--titulos)] tw:[&_h2]:[color:var(--colorTitulo)] tw:[&_h2]:[font-size:clamp(1.9rem,4vw,2.7rem)] tw:[&_h2]:[margin:.6rem_0_.75rem] tw:[&_p]:[font-family:var(--texto)] tw:[&_p]:[color:#626262] tw:[&_p]:[margin:0] tw:[&_p]:[line-height:1.6]`,
+  ].join(' '),
+  "affiliate-eyebrow": String.raw`tw:[font-family:var(--texto)] tw:[font-size:.7rem] tw:font-bold tw:[letter-spacing:.16em] tw:[color:var(--colorPrincipal)]`,
+  "affiliate-gallery": [
+    String.raw`tw:grid tw:[grid-template-rows:repeat(2,190px)] tw:[grid-auto-flow:column] tw:[grid-auto-columns:calc((100%_-_3rem)/4)] tw:[gap:1rem] tw:overflow-x-auto tw:[overscroll-behavior-x:contain] tw:[scrollbar-width:none] tw:[&::-webkit-scrollbar]:hidden tw:[padding:3px_3px_1rem] tw:[&:focus-visible]:[outline:2px_solid_var(--colorPrincipal)] tw:[&:focus-visible]:[outline-offset:4px] tw:max-1024:[grid-auto-columns:calc((100%_-_2rem)/3)] tw:max-640:[grid-auto-columns:calc((100%_-_1rem)/2.15)] tw:max-640:[grid-template-rows:repeat(2,160px)] tw:max-640:[gap:.75rem]`,
+  ].join(' '),
+  "affiliate-card": String.raw`tw:flex tw:flex-col tw:items-center tw:justify-center tw:min-w-0 tw:[padding:1.25rem] tw:[background:transparent] tw:[border:0] tw:[box-shadow:none] tw:[border-radius:14px] tw:max-640:[padding:1rem]`,
+  "affiliate-logo": String.raw`tw:flex tw:items-center tw:justify-center tw:[height:105px] tw:w-full tw:[&_img]:[max-width:100%] tw:[&_img]:[max-height:100%] tw:[&_img]:object-contain tw:[&_.image-placeholder]:[min-height:0] tw:max-640:[height:80px]`,
+  "affiliate-name": String.raw`tw:[font-family:var(--texto)] tw:[font-size:.75rem] tw:[color:#656565] tw:text-center tw:[margin-top:1rem] tw:[line-height:1.4] tw:[display:-webkit-box] tw:[-webkit-line-clamp:2] tw:[-webkit-box-orient:vertical] tw:overflow-hidden tw:[overflow-wrap:anywhere]`,
+  "affiliate-footer": String.raw`tw:flex tw:justify-center tw:[margin-top:2rem]`,
   // afiliados
   "afiliados": [
     String.raw`tw:[padding-top:4rem] tw:[padding-right:2rem] tw:[padding-bottom:4rem] tw:[padding-left:2rem] tw:text-center tw:[margin-bottom:-100px] tw:[width:100%] tw:[max-width:100vw] tw:relative`,

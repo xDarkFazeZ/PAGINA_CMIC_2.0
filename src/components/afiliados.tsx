@@ -1,6 +1,6 @@
 import { cmicClasses } from '../styles/recipes';
 import type { CmsImage, Afiliado, AfiliadoLogo } from '../types/content';
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { client, urlFor } from "../lib/sanity";
 import { useNavigate } from "react-router-dom";
 /* ===== Seguridad y validaciones (MANTENIDAS) ===== */
@@ -107,6 +107,53 @@ export default function Afiliados() {
   const [afiliados, setAfiliados] = useState<AfiliadoLogo[]>([]);
   const [status, setStatus] = useState("idle");
   const navigate = useNavigate();
+  const galleryRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery || status !== 'ok') return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+    let lastTime = 0;
+    let direction = 1;
+    let position = gallery.scrollLeft;
+    let paused = false;
+    const animate = (time: number) => {
+      const elapsed = lastTime ? Math.min(time - lastTime, 50) : 0;
+      lastTime = time;
+      if (!paused && !motion.matches && !document.hidden) {
+        const end = gallery.scrollWidth - gallery.clientWidth;
+        if (end > 0) {
+          position = Math.max(0, Math.min(end, position + direction * elapsed * 0.025));
+          gallery.scrollLeft = position;
+          if (position >= end) direction = -1;
+          if (position <= 0) direction = 1;
+        }
+      } else {
+        position = gallery.scrollLeft;
+      }
+      frame = requestAnimationFrame(animate);
+    };
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; position = gallery.scrollLeft; };
+    gallery.addEventListener('pointerenter', pause);
+    gallery.addEventListener('pointerleave', resume);
+    gallery.addEventListener('focus', pause);
+    gallery.addEventListener('blur', resume);
+    gallery.addEventListener('touchstart', pause, { passive: true });
+    gallery.addEventListener('touchend', resume);
+    gallery.addEventListener('touchcancel', resume);
+    frame = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(frame);
+      gallery.removeEventListener('pointerenter', pause);
+      gallery.removeEventListener('pointerleave', resume);
+      gallery.removeEventListener('focus', pause);
+      gallery.removeEventListener('blur', resume);
+      gallery.removeEventListener('touchstart', pause);
+      gallery.removeEventListener('touchend', resume);
+      gallery.removeEventListener('touchcancel', resume);
+    };
+  }, [afiliados, status]);
 
   useEffect(() => {
     const ctrl = new AbortController();
@@ -197,23 +244,15 @@ export default function Afiliados() {
     }
 
     return (
-      <div className={cmicClasses("logos-grid")} aria-label="Logotipos de afiliados">
+      <div id="afiliados-gallery" ref={galleryRef}
+        className={cmicClasses("affiliate-gallery")} tabIndex={0}
+        role="region" aria-label="Empresas afiliadas. Galería automática; se pausa al interactuar.">
         {afiliados.map((a) => (
-          <div
-            key={a.id}
-            className={
-              cmicClasses("logo-item" +
-              (a.isUltraWide ? " logo-item--ultrawide" : 
-               a.isWide ? " logo-item--wide" : " logo-item--regular"))
-            }
-            title={a.nombre}
-          >
-            <SafeImage
-              logo={a.logo}
-              name={a.nombre}
-              width={a.isUltraWide ? 200 : a.isWide ? 160 : 120} // ✅ Reducido ligeramente
-              height={a.isUltraWide ? 60 : a.isWide ? 70 : 80}
-            />
+          <div key={a.id} className={cmicClasses("affiliate-card")}>
+            <div className={cmicClasses("affiliate-logo")}>
+              <SafeImage logo={a.logo} name={a.nombre} width={220} height={100} />
+            </div>
+            <span className={cmicClasses("affiliate-name")}>{a.nombre}</span>
           </div>
         ))}
       </div>
@@ -221,22 +260,23 @@ export default function Afiliados() {
   }, [status, afiliados]);
 
   return (
-    <section className={cmicClasses("afiliados")} aria-labelledby="afiliados-title">
-      <h2 id="afiliados-title">Nuestros Afiliados</h2>
-      <p>
-        Gracias al apoyo de nuestros afiliados, podemos ofrecer servicios de alta calidad a nuestra comunidad.
-      </p>
+    <section className={cmicClasses("affiliate-section")} aria-labelledby="afiliados-title">
+      <div className={cmicClasses("affiliate-inner")}>
+        <div className={cmicClasses("affiliate-heading")}>
+          <div>
+            <span className={cmicClasses("affiliate-eyebrow")}>LA FUERZA DE NUESTRA CÁMARA</span>
+            <h2 id="afiliados-title">Nuestros Afiliados</h2>
+            <p>Empresas que construyen y fortalecen el futuro de Aguascalientes.</p>
+          </div>
 
-      {content}
-
-      <button
-        className={cmicClasses("btn-nosotros")}
-        onClick={handleNavigation}
-        aria-label="Conocer más sobre nuestros afiliados"
-        type="button"
-      >
-        Conoce más sobre nuestros afiliados
-      </button>
+        </div>
+        {content}
+        <div className={cmicClasses("affiliate-footer")}>
+          <button className={cmicClasses("btn-convenios-buscador")} onClick={handleNavigation} type="button">
+            Explorar directorio de afiliados
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
