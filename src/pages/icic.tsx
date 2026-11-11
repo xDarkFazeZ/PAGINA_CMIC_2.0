@@ -1,5 +1,5 @@
 import { cmicClasses } from '../styles/recipes';
-import type { CmsImage, GalleryDocument, GalleryItem, IcicEvent, EventItem, CarouselProps, SafeImageProps } from '../types/content';
+import type { CmsImage, GalleryDocument, GalleryItem, IcicEvent, EventItem, SafeImageProps } from '../types/content';
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { client, urlFor } from "../lib/sanity";
 import icicLogo from "../lib/icic-logo.webp";
@@ -19,7 +19,6 @@ const stripJsProto = (s = "") => {
     return s.replace(/javascript:/gi, "");
 };
 
-const isNonEmpty = (v: unknown) => typeof v === "string" && v.trim().length > 0;
 
 const safeHttpsUrl = (raw: string) => {
     if (!raw) return null;
@@ -38,6 +37,7 @@ const buildSafeImageUrl = (asset: CmsImage | null | undefined, { w = 1200, h, q 
     try {
         let b = urlFor(asset)
             .width(w)
+            .fit("max")
             .auto("format")
             .quality(q)
             .dpr(getDeviceDPR());
@@ -130,42 +130,9 @@ const FeaturesGrid = React.memo(() => (
     </div>
 ));
 
-const CarouselControls = React.memo(({ onPrev, onNext, itemsLength }: CarouselProps) => {
-    if (itemsLength <= 1) return null;
-
-    return (
-        <div className={cmicClasses("icic-carousel-controls")} role="group" aria-label="Controles de galería">
-            <button
-                type="button"
-                className={cmicClasses("icic-carousel-btn icic-prev")}
-                aria-label="Imagen anterior"
-                onClick={onPrev}
-            >
-                ◀
-            </button>
-            <button
-                type="button"
-                className={cmicClasses("icic-carousel-btn icic-next")}
-                aria-label="Siguiente imagen"
-                onClick={onNext}
-            >
-                ▶
-            </button>
-        </div>
-    );
-});
-
 const EventCard = React.memo(({ event }: {event: EventItem}) => {
-    const isFutureEvent = useMemo(() => {
-        try {
-            return new Date(event.rawDate) > new Date();
-        } catch {
-            return false;
-        }
-    }, [event.rawDate]);
-
     return (
-        <div className={cmicClasses(`icic-event-card ${isFutureEvent ? 'icic-event-future' : 'icic-event-past'}`)}>
+        <div className={cmicClasses("icic-event-card")}>
             <div className={cmicClasses("icic-event-image-container")}>
                 <ImageOrNothing
                     src={event.img}
@@ -174,15 +141,14 @@ const EventCard = React.memo(({ event }: {event: EventItem}) => {
                     width={400}
                     height={250}
                 />
-                <div className={cmicClasses("icic-event-date-badge")}>
-                    <time dateTime={event.rawDate}>{event.date}</time>
-                </div>
+
             </div>
             <div className={cmicClasses("icic-event-info")}>
                 <h4 className={cmicClasses("icic-event-title")}>{event.title}</h4>
                 {event.description && (
                     <p className={cmicClasses("icic-event-description")}>{event.description}</p>
                 )}
+                <time className={cmicClasses("icic-course-date")} dateTime={event.rawDate}>{event.date}</time>
                 <div className={cmicClasses("icic-event-actions")}>
                     <button
                         className={cmicClasses("icic-event-details-btn")}
@@ -397,7 +363,7 @@ export default function IcicPage() {
                     : "";
                 const date = formatDate(item.eventDate);
                 const rawDate = item.eventDate;
-                const img = buildSafeImageUrl(item.coverImage, { w: 400, h: 250 });
+                const img = buildSafeImageUrl(item.coverImage, { w: 900 });
 
                 if (!id || !img) return null;
 
@@ -418,7 +384,7 @@ export default function IcicPage() {
                     return 0;
                 }
             })
-            .slice(0, 6);
+;
     }, []);
 
     /* ===================== FETCH DATA CORREGIDO ===================== */
@@ -444,7 +410,7 @@ export default function IcicPage() {
                 }`;
 
                 // Query para eventos/cursos
-                const eventsQuery = `*[_type == "icicEvent"] | order(eventDate desc)[0...10] {
+                const eventsQuery = `*[_type == "icicEvent"] | order(eventDate desc) {
                     _id, 
                     title, 
                     eventDate, 
@@ -503,7 +469,7 @@ export default function IcicPage() {
     useEffect(() => {
         startCarousel();
         return () => stopCarousel();
-    }, [startCarousel, stopCarousel]);
+    }, [startCarousel, stopCarousel, status]);
 
     useEffect(() => {
         const onVis = () => {
@@ -521,18 +487,6 @@ export default function IcicPage() {
         fetchData(ctrl.signal);
         return () => ctrl.abort();
     }, [fetchData]);
-
-    const handlePrevSlide = useCallback(() => {
-        stopCarousel();
-        setCurrentSlide((p) => (p - 1 + icicImages.length) % icicImages.length);
-        startCarousel();
-    }, [icicImages.length, stopCarousel, startCarousel]);
-
-    const handleNextSlide = useCallback(() => {
-        stopCarousel();
-        setCurrentSlide((p) => (p + 1) % icicImages.length);
-        startCarousel();
-    }, [icicImages.length, stopCarousel, startCarousel]);
 
     const handleIndicatorClick = useCallback((index: number) => {
         stopCarousel();
@@ -577,32 +531,25 @@ export default function IcicPage() {
                                 width={800}
                                 height={600}
                             />
-                            {(isNonEmpty(image.titulo) || isNonEmpty(image.descripcion)) && (
-                                <div className={cmicClasses("icic-carousel-caption")}>
-                                    {image.titulo && <span className={cmicClasses("icic-carousel-title")}>{image.titulo}</span>}
-                                    {image.descripcion && <p className={cmicClasses("icic-carousel-desc")}>{image.descripcion}</p>}
-                                </div>
-                            )}
+
                         </div>
                     ))}
                 </div>
 
-                <CarouselControls
-                    onPrev={handlePrevSlide}
-                    onNext={handleNextSlide}
-                    itemsLength={icicImages.length}
-                />
+                <div className={cmicClasses("icic-media-copy")} key={icicImages[currentSlide]?.id}>
+                    <h4>{icicImages[currentSlide]?.titulo}</h4>
+                    {icicImages[currentSlide]?.descripcion && <p>{icicImages[currentSlide].descripcion}</p>}
+                </div>
 
                 {icicImages.length > 1 && (
-                    <div className={cmicClasses("icic-carousel-indicators")} role="tablist">
+                    <div className={cmicClasses("icic-carousel-indicators")} aria-label="Seleccionar foto">
                         {icicImages.map((_, index) => (
                             <button
                                 key={index}
                                 className={cmicClasses(`icic-indicator ${index === currentSlide ? 'icic-indicator-active' : ''}`)}
                                 onClick={() => handleIndicatorClick(index)}
                                 aria-label={`Ir a imagen ${index + 1}`}
-                                aria-selected={index === currentSlide}
-                                role="tab"
+                                aria-pressed={index === currentSlide}
                                 type="button"
                             />
                         ))}
@@ -610,7 +557,7 @@ export default function IcicPage() {
                 )}
             </div>
         );
-    }, [icicImages, currentSlide, stopCarousel, startCarousel, handlePrevSlide, handleNextSlide, handleIndicatorClick, status]);
+    }, [icicImages, currentSlide, stopCarousel, startCarousel, handleIndicatorClick, status]);
 
     const calendarSection = useMemo(() => {
         if (!calendarData) return null;
@@ -626,22 +573,23 @@ export default function IcicPage() {
                         width={800}
                         height={600}
                     />
-                    {calendarData.img && (
-                        <a
-                            href={`${calendarData.img}?dl=calendario-cursos-icic.pdf`}
-                            className={cmicClasses("icic-download-btn")}
-                            download="calendario-cursos-icic.pdf"
-                            aria-label="Descargar calendario de cursos"
-                        >
-                            📥 Descargar Calendario
-                        </a>
-                    )}
+
                 </div>
                 {calendarData.descripcion && (
                     <div className={cmicClasses("icic-calendar-description")}>
                         <p>{calendarData.descripcion}</p>
                     </div>
                 )}
+                    {calendarData.img && (
+                        <a
+                            href={`${calendarData.img}&dl=calendario-cursos-icic`}
+                            className={cmicClasses("icic-calendar-download")}
+                            download
+                            aria-label="Descargar calendario de cursos"
+                        >
+                            📥 Descargar Calendario
+                        </a>
+                    )}
             </div>
         );
     }, [calendarData]);
@@ -649,47 +597,12 @@ export default function IcicPage() {
     const eventsSection = useMemo(() => {
         if (recentEvents.length === 0) return null;
 
-        const futureEvents = recentEvents.filter(event => {
-            try {
-                return new Date(event.rawDate) > new Date();
-            } catch {
-                return false;
-            }
-        });
-
-        const pastEvents = recentEvents.filter(event => {
-            try {
-                return new Date(event.rawDate) <= new Date();
-            } catch {
-                return true;
-            }
-        });
-
         return (
             <div className={cmicClasses("icic-events-section")}>
                 <h3 className={cmicClasses("icic-events-title")}>Cursos y Conferencias</h3>
-
-                {futureEvents.length > 0 && (
-                    <>
-                        <h4 className={cmicClasses("icic-events-subtitle")}>Próximos Eventos</h4>
-                        <div className={cmicClasses("icic-events-grid")}>
-                            {futureEvents.map((event) => (
-                                <EventCard key={event.id} event={event} />
-                            ))}
-                        </div>
-                    </>
-                )}
-
-                {pastEvents.length > 0 && (
-                    <>
-                        <h4 className={cmicClasses("icic-events-subtitle")}>Eventos Realizados</h4>
-                        <div className={cmicClasses("icic-events-grid")}>
-                            {pastEvents.map((event) => (
-                                <EventCard key={event.id} event={event} />
-                            ))}
-                        </div>
-                    </>
-                )}
+                <div className={cmicClasses("icic-events-grid")}>
+                    {recentEvents.map((event) => <EventCard key={event.id} event={event} />)}
+                </div>
             </div>
         );
     }, [recentEvents]);
@@ -699,7 +612,7 @@ export default function IcicPage() {
     /* ===================== RENDERIZADO ===================== */
     if (status === "loading" || status === "idle") {
         return (
-            <div className={cmicClasses("icic-page")} aria-labelledby="loading-heading">
+            <div className={cmicClasses("icic-page icic-redesign")} aria-labelledby="loading-heading">
                 <div className={cmicClasses("icic-loading-container")}>
                     <div className={cmicClasses("icic-loading-spinner")} aria-label="Cargando contenido"></div>
                     <p>Cargando información del ICIC...</p>
@@ -710,7 +623,7 @@ export default function IcicPage() {
 
     if (status === "error") {
         return (
-            <div className={cmicClasses("icic-page")} aria-labelledby="error-heading">
+            <div className={cmicClasses("icic-page icic-redesign")} aria-labelledby="error-heading">
                 <div className={cmicClasses("icic-error-container")}>
                     <p role="alert">{errMsg}</p>
                     <button
@@ -727,7 +640,7 @@ export default function IcicPage() {
     }
 
     return (
-        <div className={cmicClasses("icic-page")}>
+        <div className={cmicClasses("icic-page icic-redesign")}>
             {/* Hero Section */}
             <section className={cmicClasses("icic-hero-section")}>
                 <div className={cmicClasses("icic-hero-content")}>

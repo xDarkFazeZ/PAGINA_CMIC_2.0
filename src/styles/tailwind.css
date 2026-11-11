@@ -436,3 +436,14 @@
 
 /* The site uses its original light appearance. */
 @layer base { :root { color-scheme: light; } }
+
+/* Hide the page scrollbar without disabling wheel, touch, or keyboard scrolling. */
+@layer base {
+  html, body { scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+}
+
+@keyframes cmic-photo-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

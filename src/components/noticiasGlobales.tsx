@@ -565,8 +565,8 @@ export default function NoticiasGlobales() {
       <div className={cmicClasses("ng-header-modern")}>
         <h2 className={cmicClasses("ng-title-modern")}>Noticias y Eventos</h2>
         <div className={cmicClasses("ng-org-buttons")}>
-          <Link className={cmicClasses("ng-org-btn cmic")} to="/noticiasFacebook">CMIC</Link>
-          <Link className={cmicClasses("ng-org-btn icic")} to="/cursosICIC">ICIC</Link>
+          <Link className={cmicClasses("more-courses-btn home-action")} to="/noticiasFacebook">CMIC</Link>
+          <Link className={cmicClasses("more-courses-btn home-action")} to="/cursosICIC">ICIC</Link>
         </div>
       </div>
 

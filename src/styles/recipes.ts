@@ -301,7 +301,9 @@ const recipes: Record<string, string> = {
     String.raw`tw:[&_.icic-highlight]:[margin-block:0] tw:[&_.icic-highlight]:[padding-top:clamp(3rem,5vw,4.5rem)] tw:[&_.icic-highlight]:[padding-bottom:var(--home-section-space)] tw:[&_.icic-header]:[margin-bottom:2.5rem] tw:[&_.icic-logo-container]:flex tw:[&_.icic-logo-container]:justify-center tw:[&_.icic-logo-container]:[margin:0_0_1rem]`,
     String.raw`tw:[&_.icic-logoHead]:block tw:[&_.icic-logoHead]:[width:clamp(180px,24vw,280px)] tw:[&_.icic-logoHead]:[height:auto] tw:[&_.icic-logoHead]:[padding:0] tw:[&_.icic-logoHead]:[margin:0_auto]! tw:[&_.icic-highlight_.section-title]:[margin-top:0] tw:[&_.icic-grid]:[gap:2rem]`,
     String.raw`tw:[&_.ng-wrapper]:[margin-block:0] tw:[&_.ng-wrapper]:[padding-block:var(--home-section-space)] tw:max-640:[&_.icic-header]:[margin-bottom:2rem] tw:max-640:[&_.icic-grid]:[gap:1.5rem]`,
-    String.raw`tw:[&_.icic-gallery]:[gap:1rem] tw:[&_.icic-gallery_>_h3]:[margin-bottom:0] tw:[&_.icic-gallery_.carousel-container]:[height:auto] tw:[&_.icic-gallery_.carousel-container]:[aspect-ratio:12/7] tw:[&_.icic-gallery_.carousel-slide]:items-start tw:[&_.icic-gallery_.carousel-image]:[object-position:top]`,
+    String.raw`tw:[&_.icic-gallery]:[gap:1rem] tw:[&_.icic-gallery_>_h3]:[margin-bottom:0] tw:[&_.icic-gallery_.carousel-container]:[height:auto] tw:[&_.icic-gallery_.carousel-container]:[aspect-ratio:auto] tw:[&_.icic-gallery_.carousel-slide]:items-start tw:[&_.icic-gallery_.carousel-image]:[object-position:top]`,
+    String.raw`tw:[&_.affiliate-section]:overflow-hidden tw:[&_.affiliate-gallery]:[width:100vw] tw:[&_.affiliate-gallery]:[margin-inline:calc(50%_-_50vw)] tw:[&_.affiliate-gallery]:[padding-inline:0] tw:[&_.affiliate-gallery]:[grid-auto-columns:max(180px,22vw)] tw:[&_.affiliate-logo_img]:[transition:transform_.25s_ease] tw:[&_.affiliate-card:hover_.affiliate-logo_img]:[transform:scale(1.12)] tw:motion-reduce:[&_.affiliate-logo_img]:[transition:none]`,
+    String.raw`tw:[&_.icic-gallery_.carousel-slide]:hidden tw:[&_.icic-gallery_.carousel-slide]:relative tw:[&_.icic-gallery_.carousel-slide]:[inset:auto] tw:[&_.icic-gallery_.carousel-slide.active]:flex tw:[&_.icic-gallery_.carousel-slide.active]:[animation:cmic-photo-reveal_.65s_ease-out_both] tw:motion-reduce:[&_.icic-gallery_.carousel-slide.active]:[animation:none] tw:[&_.icic-gallery_.carousel-slide]:[transform:none] tw:[&_.icic-gallery_.carousel-image]:[width:auto] tw:[&_.icic-gallery_.carousel-image]:[height:auto] tw:[&_.icic-gallery_.carousel-image]:[max-height:70vh] tw:[&_.icic-gallery_.carousel-image]:[max-width:100%] tw:[&_.icic-gallery_.button-container]:[margin-top:1rem]`,
   ].join(' '),
   // App
   "text-titulo": [
@@ -549,6 +551,7 @@ const recipes: Record<string, string> = {
   "convenios-loading": [
     String.raw`tw:text-center tw:[padding-top:3rem] tw:[padding-right:1.5rem] tw:[padding-bottom:3rem] tw:[padding-left:1.5rem] tw:[font-size:1.05rem] tw:[color:var(--muted)] tw:[font-family:var(--texto)]`,
   ].join(' '),
+  "home-action": String.raw`tw:inline-flex tw:items-center tw:justify-center tw:[gap:.65rem] tw:no-underline tw:[isolation:isolate] tw:[&:focus-visible]:[outline:2px_solid_var(--colorPrincipal)] tw:[&:focus-visible]:[outline-offset:4px]`,
   "affiliate-section": [
     String.raw`tw:[padding:5rem_1.5rem] tw:[background:#f7f7f5] tw:[border-block:1px_solid_#e9e7e3] tw:max-640:[padding:3rem_1rem]`,
   ].join(' '),
@@ -1189,6 +1192,16 @@ const recipes: Record<string, string> = {
     String.raw`tw:[&:hover]:[background:var(--colorSecundario)]`,
   ].join(' '),
   // icic
+  "icic-redesign": [
+    String.raw`tw:[&_.icic-grid-layout]:[align-items:start] tw:[&_.icic-grid-calendar_.icic-calendar-preview]:[border:1px_solid_#e8e3df] tw:[&_.icic-grid-calendar_.icic-calendar-preview]:[box-shadow:0_8px_28px_#3020170a] tw:[&_.icic-grid-calendar_.icic-calendar-preview:hover]:[transform:none] tw:[&_.icic-grid-calendar_.icic-calendar-image]:[max-height:none]`,
+    String.raw`tw:[&_.icic-grid-gallery_.icic-gallery-carousel]:[background:transparent] tw:[&_.icic-grid-gallery_.icic-gallery-carousel]:[box-shadow:none] tw:[&_.icic-grid-gallery_.icic-carousel-container]:[height:auto] tw:[&_.icic-grid-gallery_.icic-carousel-container]:[background:#f5f3f0] tw:[&_.icic-grid-gallery_.icic-carousel-container]:[border:1px_solid_#e8e3df]`,
+    String.raw`tw:[&_.icic-grid-gallery_.icic-carousel-slide]:hidden tw:[&_.icic-grid-gallery_.icic-carousel-slide]:relative tw:[&_.icic-grid-gallery_.icic-carousel-slide.icic-active]:flex tw:[&_.icic-grid-gallery_.icic-carousel-slide.icic-active]:[animation:cmic-photo-reveal_.65s_ease-out_both] tw:motion-reduce:[&_.icic-grid-gallery_.icic-carousel-slide.icic-active]:[animation:none] tw:[&_.icic-grid-gallery_.icic-carousel-image]:[max-height:65vh] tw:[&_.icic-grid-gallery_.icic-carousel-image]:[transform:none]`,
+    String.raw`tw:[&_.icic-grid-gallery_.icic-carousel-indicators]:static tw:[&_.icic-grid-gallery_.icic-carousel-indicators]:[padding:1rem] tw:[&_.icic-grid-gallery_.icic-indicator]:[background:#c8bdb7] tw:[&_.icic-grid-gallery_.icic-indicator-active]:[background:var(--colorPrincipal)]`,
+    String.raw`tw:[&_.icic-event-image-container]:[padding-top:0] tw:[&_.icic-event-image-container]:[background:#f5f3f0] tw:[&_.icic-event-image]:static tw:[&_.icic-event-image]:block tw:[&_.icic-event-image]:[height:auto] tw:[&_.icic-event-image]:object-contain tw:[&_.icic-event-card:hover_.icic-event-image]:[transform:none]`,
+  ].join(' '),
+  "icic-media-copy": String.raw`tw:[padding:1.25rem_0_.25rem] tw:[color:var(--colorTexto)] tw:[font-family:var(--texto)] tw:[&_h4]:[font-family:var(--subtitulos)] tw:[&_h4]:[font-size:1.15rem] tw:[&_h4]:[color:var(--colorTitulo)] tw:[&_h4]:[margin:0_0_.5rem] tw:[&_p]:[margin:0] tw:[&_p]:[line-height:1.7] tw:[animation:cmic-photo-reveal_.65s_ease-out_both] tw:motion-reduce:[animation:none]`,
+  "icic-calendar-download": String.raw`tw:inline-flex tw:items-center tw:justify-center tw:[margin-top:1rem] tw:[padding:.85rem_1.5rem] tw:[border:1px_solid_var(--colorPrincipal)] tw:[border-radius:10px] tw:[background:var(--colorPrincipal)] tw:[color:white] tw:no-underline tw:[font-family:var(--texto)] tw:font-semibold tw:[&:hover]:[background:var(--colorSecundario)] tw:[&:focus-visible]:[outline:2px_solid_var(--colorPrincipal)] tw:[&:focus-visible]:[outline-offset:4px]`,
+  "icic-course-date": String.raw`tw:block tw:[font-family:var(--texto)] tw:[font-size:.9rem] tw:[line-height:1.5] tw:[color:var(--colorPrincipal)] tw:font-semibold`,
   "icic-page": [
     String.raw`tw:[min-height:100vh] tw:[background-color:var(--colorFondo)] tw:[padding-top:var(--header-offset,_80px)]`,
     String.raw`tw:max-768:[padding-top:70px]`,

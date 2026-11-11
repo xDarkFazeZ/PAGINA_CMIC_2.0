@@ -288,7 +288,7 @@ export default function Afiliados() {
         </div>
         {content}
         <div className={cmicClasses("affiliate-footer")}>
-          <button className={cmicClasses("btn-convenios-buscador")} onClick={handleNavigation} type="button">
+          <button className={cmicClasses("more-courses-btn home-action")} onClick={handleNavigation} type="button">
             Explorar directorio de afiliados
           </button>
         </div>

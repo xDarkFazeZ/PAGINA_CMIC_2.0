@@ -292,7 +292,7 @@ export default function ConveniosCarouselLogos({
 
       <div className={cmicClasses("convenios-cta")}>
         <button
-          className={cmicClasses("btn-convenios-buscador")}
+          className={cmicClasses("more-courses-btn home-action")}
           onClick={() => navigate("/convenios")}
           aria-label="Explorar todos los convenios disponibles"
           type="button"
