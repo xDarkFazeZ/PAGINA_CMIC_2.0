@@ -76,7 +76,7 @@ export default function Convenios() {
   }, [convenios, busqueda, cat]);
 
   return (
-    <main className={cmicClasses("convenios")}>
+    <main className={cmicClasses("convenios convenios-responsive")}>
       <section className={cmicClasses("convenios__hero")}>
         <h1 className={cmicClasses("convenios__title")}>Convenios</h1>
         <p className={cmicClasses("convenios__subtitle")}>Beneficios claros, sin saturar de información.</p>

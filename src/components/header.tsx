@@ -218,7 +218,7 @@ export default function Header() {
   );
 
   return (
-    <header className={cmicClasses(`header ${isScrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`)}>
+    <header className={cmicClasses(`header ${['/servicios', '/convenios', '/asociado-estudiantil-2025', '/afiliacion-2025'].includes(location.pathname) ? 'header-large-mobile-logo' : ''} ${isScrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`)}>
       <div className={cmicClasses("logo-container")}>
         <Link to="/" onClick={handleLinkClick} aria-label="CMIC Aguascalientes — inicio" tabIndex={mobileMenuOpen ? -1 : undefined}>
           <img src={logoImage} alt="CMIC Aguascalientes" className={cmicClasses("logo")} />

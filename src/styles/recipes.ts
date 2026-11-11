@@ -95,6 +95,7 @@ const recipes: Record<string, string> = {
     String.raw`tw:[&_button]:[font-family:var(--enlaces)]`,
   ].join(' '),
   // header
+  "header-large-mobile-logo": String.raw`tw:max-1024:[&.header_.logo-container]:[height:76px] tw:max-1024:[&.header_.logo]:[height:96px] tw:max-1024:[&.header_.logo]:[width:auto] tw:max-1024:[&.header_.logo]:[max-width:calc(100vw_-_100px)] tw:max-1024:[&.header_.logo]:[margin-top:-8px] tw:max-1024:[&.header.scrolled_.logo]:[height:96px] tw:max-640:[&.header_.logo-container]:[height:68px] tw:max-640:[&.header_.logo]:[height:86px] tw:max-640:[&.header.scrolled_.logo]:[height:86px]`,
   "logo-container": [
     String.raw`tw:[height:60px] tw:[z-index:1001] tw:[transition:var(--transition)] tw:[opacity:1]! tw:[transform:none]! tw:visible!`,
     String.raw`tw:[&.hidden]:[opacity:0] tw:[&.hidden]:invisible`,
@@ -2020,6 +2021,12 @@ const recipes: Record<string, string> = {
     String.raw`tw:[background:var(--colorFondo)] tw:[min-height:100dvh] tw:[padding-bottom:3rem]`,
   ].join(' '),
   // conveniosBuscador
+  "convenios-responsive": [
+    String.raw`tw:max-1024:text-center tw:max-1024:[&_*]:text-center tw:max-1024:[&_.card__body]:items-center tw:max-1024:[&_.card__cta]:w-full tw:max-1024:[&_.convenios__filters]:justify-center tw:max-1024:[&_.convenios__actions]:items-center`,
+    String.raw`tw:max-1024:[&_.card__media]:[height:260px] tw:max-1024:[&_.card__media]:[padding:1rem] tw:max-1024:[&_.card__media_img]:[width:100%] tw:max-1024:[&_.card__media_img]:[height:100%] tw:max-1024:[&_.card__media_img]:[max-width:360px] tw:max-1024:[&_.card__media_img]:[max-height:225px] tw:max-1024:[&_.card__media_img]:object-contain`,
+    String.raw`tw:max-1024:[&_.details__logo]:[max-width:100%] tw:max-1024:[&_.details__logo]:[width:340px] tw:max-1024:[&_.details__logo]:[max-height:200px] tw:max-1024:[&_.details__logo]:[height:auto] tw:max-1024:[&_.miniTable_th]:text-center tw:max-1024:[&_.miniTable_td]:text-center tw:max-1024:[&_.ctaRow]:justify-center`,
+    String.raw`tw:max-1024:[&_.card__cta]:justify-center tw:max-1024:[&_.details]:text-center tw:max-1024:[&_.details_*]:text-center tw:max-1024:[&_.details__logo]:[max-height:240px] tw:max-1024:[&_.details__logo]:[width:min(100%,380px)] tw:max-1024:[&_.details__section]:[margin-inline:auto] tw:max-1024:[&_.ctaRow]:justify-center tw:max-1024:[&_.convenios__search_input]:text-center`,
+  ].join(' '),
   "convenios__hero": [
     String.raw`tw:[width:min(1100px,_94vw)] tw:[margin-top:100px] tw:[margin-right:auto] tw:[margin-bottom:0] tw:[margin-left:auto] tw:text-center tw:[padding-top:2.2rem] tw:[padding-right:0] tw:[padding-bottom:1.2rem] tw:[padding-left:0]`,
     String.raw``,
@@ -2388,6 +2395,7 @@ const recipes: Record<string, string> = {
   "servicios-page-v2": [
     String.raw`tw:[min-height:100vh] tw:[background:var(--colorFondo)] tw:[padding-top:var(--header-offset)] tw:[font-family:var(--texto)]`,
     String.raw`tw:[padding-top:calc(var(--site-header-height)_+_1rem)]`,
+    String.raw`tw:max-1024:[&_.card-media]:[height:210px] tw:max-1024:[&_.card-media]:[padding:1.5rem] tw:max-1024:[&_.card-media_img]:[width:100%] tw:max-1024:[&_.card-media_img]:[height:100%] tw:max-1024:[&_.card-media_img]:[max-width:210px] tw:max-1024:[&_.card-media_img]:[max-height:155px] tw:max-1024:[&_.card-media_img]:object-contain`,
   ].join(' '),
   // servicios
   "hero-compact": [
@@ -2403,6 +2411,8 @@ const recipes: Record<string, string> = {
     String.raw`tw:[font-family:var(--texto)] tw:[font-size:clamp(1.125rem,_2vw,_1.25rem)] tw:[color:var(--colorTexto)] tw:[max-width:600px] tw:[margin-top:0] tw:[margin-right:auto] tw:[margin-bottom:0] tw:[margin-left:auto] tw:[line-height:1.7] tw:[opacity:.8]`,
   ].join(' '),
   // servicios
+  "service-index": String.raw`tw:relative tw:[max-width:650px] tw:[margin:0_auto_2.5rem] tw:[padding:1rem] tw:text-center tw:[font-family:var(--texto)] tw:[&_>_span]:block tw:[&_>_span]:[font-size:.85rem] tw:[&_>_span]:[color:var(--colorTexto)] tw:[&_>_span]:[margin-bottom:.85rem] tw:[&_>_div]:flex tw:[&_>_div]:flex-wrap tw:[&_>_div]:justify-center tw:[&_>_div]:[gap:.5rem] tw:max-480:[&_.nav-btn]:[padding:.7rem_1rem] tw:max-480:[&_.nav-btn]:[width:auto]`,
+  "service-section-jump": String.raw`tw:inline-flex tw:items-center tw:[gap:.65rem] tw:[margin-top:1rem] tw:[font-family:var(--texto)] tw:[font-size:.85rem] tw:[color:var(--colorTexto)] tw:[&_select]:[padding:.55rem_.75rem] tw:[&_select]:[min-height:44px] tw:[&_select]:[border:1px_solid_var(--border)] tw:[&_select]:[border-radius:8px] tw:[&_select]:[background:white] tw:[&_select]:[color:var(--colorPrincipal)] tw:[&_select]:[font-family:var(--texto)] tw:[&_select]:cursor-pointer tw:[&_select:focus-visible]:[outline:2px_solid_var(--colorPrincipal)] tw:[&_select:focus-visible]:[outline-offset:3px]`,
   "service-nav": [
     String.raw`tw:sticky tw:[top:var(--header-offset)] tw:[z-index:100] tw:[max-width:450px] tw:[margin-top:0] tw:[margin-right:auto] tw:[margin-bottom:var(--space-6)] tw:[margin-left:auto] tw:[padding-top:var(--space-3)] tw:[padding-right:var(--space-4)] tw:[padding-bottom:var(--space-3)] tw:[padding-left:var(--space-4)] tw:[background:var(--bg-card)] tw:[backdrop-filter:blur(20px)] tw:[border-radius:var(--radius-xl)] tw:[box-shadow:var(--shadow-sm)] tw:[border:1px_solid_var(--border)] tw:text-center`,
     String.raw`tw:max-768:[padding-top:.75rem] tw:max-768:[padding-right:1rem] tw:max-768:[padding-bottom:.75rem] tw:max-768:[padding-left:1rem] tw:max-768:[margin-bottom:var(--space-4)]`,
@@ -2472,6 +2482,7 @@ const recipes: Record<string, string> = {
     String.raw`tw:[&_img]:[max-width:120px] tw:[&_img]:[max-height:100px] tw:[&_img]:object-contain tw:[&_img]:[transition:var(--transition)] tw:[&_img]:[filter:grayscale(.3)]`,
     String.raw`tw:[.service-card:hover_&_img]:[transform:scale(1.1)] tw:[.service-card:hover_&_img]:[filter:grayscale(0)]`,
     String.raw`tw:motion-reduce:[.service-card:hover_&_img]:[transform:none]`,
+    String.raw`tw:max-1024:[height:210px] tw:max-1024:[padding:1rem] tw:max-1024:[&_img]:[width:auto] tw:max-1024:[&_img]:[height:auto] tw:max-1024:[&_img]:[max-width:85%] tw:max-1024:[&_img]:[max-height:175px]`,
   ].join(' '),
   // servicios
   "card-content": [
@@ -3179,6 +3190,8 @@ const recipes: Record<string, string> = {
   "afi-card-icon": [
     String.raw`tw:[width:80px] tw:[height:80px] tw:[background:var(--colorFondo)] tw:[border-radius:var(--radius-lg)] tw:flex tw:items-center tw:justify-center tw:[margin-bottom:1.5rem]`,
     String.raw`tw:[&_img]:[width:48px] tw:[&_img]:[height:48px] tw:[&_img]:object-contain tw:[&_img]:[transform:translateZ(0)] tw:[&_img]:[backface-visibility:hidden] tw:[&_img]:[will-change:transform]`,
+    String.raw`tw:max-1024:[&_img]:[width:clamp(88px,12vw,120px)] tw:max-1024:[&_img]:[height:clamp(88px,12vw,120px)] tw:max-1024:shrink-0`,
+    String.raw`tw:max-1024:[width:clamp(112px,16vw,152px)] tw:max-1024:[height:clamp(112px,16vw,152px)]`,
   ].join(' '),
   // afiliacion2025
   "afi-card-body": [
@@ -3382,7 +3395,8 @@ const recipes: Record<string, string> = {
   "ase-card-icon": [
     String.raw`tw:[margin-bottom:1.5rem] tw:[padding-top:clamp(1rem,_2vw,_1.5rem)] tw:[padding-right:clamp(1rem,_2vw,_1.5rem)] tw:[padding-bottom:clamp(1rem,_2vw,_1.5rem)] tw:[padding-left:clamp(1rem,_2vw,_1.5rem)] tw:[border-radius:var(--radius-xl)] tw:flex tw:items-center tw:justify-center`,
     String.raw`tw:[&_img]:[width:clamp(60px,_10vw,_80px)] tw:[&_img]:[height:clamp(60px,_10vw,_80px)] tw:[&_img]:object-contain tw:[&_img]:[transform:translateZ(0)] tw:[&_img]:[backface-visibility:hidden] tw:[&_img]:[will-change:transform]`,
-    String.raw`tw:max-480:[&_img]:[width:50px] tw:max-480:[&_img]:[height:50px]`,
+    String.raw`tw:max-480:[&_img]:[width:88px] tw:max-480:[&_img]:[height:88px]`,
+    String.raw`tw:max-1024:[&_img]:[width:clamp(88px,12vw,120px)] tw:max-1024:[&_img]:[height:clamp(88px,12vw,120px)] tw:max-1024:shrink-0`,
   ].join(' '),
   // asociadoEstudiantil
   "ase-card-body": [

@@ -135,7 +135,6 @@ const ServiceCard = React.memo(function ServiceCard({ service, sanityImages, isL
 /* ===================== MAIN ===================== */
 export default function ServiciosOptimizado() {
   const [activeSection, setActiveSection] = useState("productos");
-  const [isIndexOpen, setIsIndexOpen] = useState(false);
 
   const [sanityImages, setSanityImages] = useState<ServiceImages>({});
   const [imagesLoading, setImagesLoading] = useState(true);
@@ -201,51 +200,14 @@ export default function ServiciosOptimizado() {
     };
   }, []);
 
-  // ⬇️⬇️ NUEVO: calcula offsets del header para que service-nav suba más al hacer scroll
-  useEffect(() => {
-    const root = document.documentElement;
-
-    const computeOffsets = () => {
-      const header = document.querySelector(".header");
-      if (!header) return;
-
-      const h = Math.max(0, header.getBoundingClientRect().height || 0);
-
-      // Altura “normal”
-      root.style.setProperty("--header-offset", `${h}px`);
-
-      // Altura compacta cuando el header está scrolled (ajusta el factor si quieres subir más)
-      const compact = Math.max(44, Math.round(h * 0.62));
-      root.style.setProperty("--header-offset-scrolled", `${compact}px`);
-    };
-
-    computeOffsets();
-    window.addEventListener("resize", computeOffsets);
-    window.addEventListener("scroll", computeOffsets, { passive: true });
-
-    const header = document.querySelector(".header");
-    let mo: MutationObserver | undefined;
-    if (header && "MutationObserver" in window) {
-      mo = new MutationObserver(computeOffsets);
-      mo.observe(header, { attributes: true, attributeFilter: ["class", "style"] });
-    }
-
-    return () => {
-      window.removeEventListener("resize", computeOffsets);
-      window.removeEventListener("scroll", computeOffsets);
-      mo?.disconnect?.();
-    };
-  }, []);
-  // ⬆️⬆️ FIN NUEVO
-
   const scrollToSection = useCallback((sectionId: string) => {
     const el = document.getElementById(`section-${sectionId}`);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - CONFIG.SCROLL_OFFSET;
+    const headerHeight = document.querySelector('.header')?.getBoundingClientRect().height || CONFIG.SCROLL_OFFSET;
+    const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
     const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
     window.scrollTo({ top, behavior: prefersReduced ? "auto" : "smooth" });
     setActiveSection(sectionId);
-    if (window.innerWidth < 1024) setIsIndexOpen(false);
   }, []);
 
   const handleWhatsAppClick = useCallback(() => {
@@ -308,25 +270,13 @@ export default function ServiciosOptimizado() {
         </header>
 
         {/* NAV */}
-        <nav className={cmicClasses(`service-nav glass ${isIndexOpen ? "open" : ""}`)} aria-label="Navegación de secciones">
-          <button
-            className={cmicClasses("nav-toggle")}
-            onClick={() => setIsIndexOpen((v) => !v)}
-            aria-expanded={isIndexOpen}
-            aria-controls="nav-items"
-          >
-            ☰ Categorías
-          </button>
-
-          <div id="nav-items" className={cmicClasses("nav-items")} role="tablist" aria-label="Categorías">
+        <nav className={cmicClasses("service-index")} aria-label="Explorar servicios por categoría">
+          <span>Explora nuestros servicios</span>
+          <div>
             {["productos", "beneficios", "facilidades"].map((section) => (
-              <button
-                key={section}
-                role="tab"
-                aria-selected={activeSection === section}
+              <button key={section} type="button"
                 className={cmicClasses(`nav-btn ${activeSection === section ? "active" : ""}`)}
-                onClick={() => scrollToSection(section)}
-              >
+                onClick={() => scrollToSection(section)}>
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
             ))}
@@ -340,6 +290,14 @@ export default function ServiciosOptimizado() {
             <div className={cmicClasses("section-header")}>
               <h2 id="titulo-productos" className={cmicClasses("section-title")}>Productos y Servicios</h2>
               <p className={cmicClasses("section-desc")}>Soluciones especializadas para impulsar tu negocio</p>
+              <label className={cmicClasses("service-section-jump")}>
+                Ir a sección
+                <select value="productos" onChange={(event) => scrollToSection(event.target.value)}>
+                  <option value="productos">Productos</option>
+                  <option value="beneficios">Beneficios</option>
+                  <option value="facilidades">Facilidades</option>
+                </select>
+              </label>
             </div>
             <div className={cmicClasses("services-grid")} style={{ "--min": `${CONFIG.GRID_MIN}px` } as React.CSSProperties}>
               {Productos}
@@ -351,6 +309,14 @@ export default function ServiciosOptimizado() {
             <div className={cmicClasses("section-header")}>
               <h2 id="titulo-beneficios" className={cmicClasses("section-title")}>Beneficios Exclusivos</h2>
               <p className={cmicClasses("section-desc")}>Ventajas únicas para socios CMIC</p>
+              <label className={cmicClasses("service-section-jump")}>
+                Ir a sección
+                <select value="beneficios" onChange={(event) => scrollToSection(event.target.value)}>
+                  <option value="productos">Productos</option>
+                  <option value="beneficios">Beneficios</option>
+                  <option value="facilidades">Facilidades</option>
+                </select>
+              </label>
             </div>
             <div className={cmicClasses("services-grid")} style={{ "--min": `${CONFIG.GRID_MIN}px` } as React.CSSProperties}>
               {Beneficios}
@@ -362,6 +328,14 @@ export default function ServiciosOptimizado() {
             <div className={cmicClasses("section-header")}>
               <h2 id="titulo-facilidades" className={cmicClasses("section-title")}>Facilidades</h2>
               <p className={cmicClasses("section-desc")}>Herramientas para simplificar tu operación</p>
+              <label className={cmicClasses("service-section-jump")}>
+                Ir a sección
+                <select value="facilidades" onChange={(event) => scrollToSection(event.target.value)}>
+                  <option value="productos">Productos</option>
+                  <option value="beneficios">Beneficios</option>
+                  <option value="facilidades">Facilidades</option>
+                </select>
+              </label>
             </div>
             <div className={cmicClasses("services-grid")} style={{ "--min": `${CONFIG.GRID_MIN}px` } as React.CSSProperties}>
               {Facilidades}
