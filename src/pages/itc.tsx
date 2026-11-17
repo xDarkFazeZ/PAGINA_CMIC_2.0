@@ -216,7 +216,7 @@ const MaestriaCard = React.memo(function MaestriaCard({
 
         {/* Reverso (desktop) */}
         <div id={`maestria-details-${index}`} className={cmicClasses("flip-card-back")} aria-hidden={!isFlipped}>
-          <button type="button" className="tw:mb-2 tw:shrink-0 tw:cursor-pointer tw:rounded-lg tw:border tw:border-solid tw:border-[#720000] tw:bg-white tw:px-4 tw:py-2 tw:text-[#720000]" onClick={() => onToggleFlip(maestria._id)}>Volver</button>
+          <button type="button" className="maestria-volver tw:mb-2 tw:shrink-0 tw:cursor-pointer tw:rounded-lg tw:border tw:border-solid tw:border-[#720000] tw:bg-white tw:px-4 tw:py-2 tw:text-[#720000]" onClick={() => onToggleFlip(maestria._id)}>Volver</button>
           <div className={cmicClasses("contenido-scroll")}>
             <section aria-labelledby={`requisitos-${index}`}>
               <h3 id={`requisitos-${index}`}>Requisitos</h3>

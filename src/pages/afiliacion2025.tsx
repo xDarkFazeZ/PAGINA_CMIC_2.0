@@ -128,7 +128,6 @@ const Afiliacion2026 = React.memo(function Afiliacion2026() {
               <p className={cmicClasses("afi-subtitle")} itemProp="description">
                 {safeText(subtitle)}
               </p>
-              <ContactButtons />
             </div>
 
             <figure className={cmicClasses("afi-hero-media")}>

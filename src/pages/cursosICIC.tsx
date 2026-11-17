@@ -306,7 +306,7 @@ export default function CursosICIC() {
 
       {/* Call-to-action */}
       <div className={cmicClasses("cta-section")}>
-        <div className={cmicClasses("cta-content")}>
+        <div className={cmicClasses("cta-content cursos-contacto")}>
           <div className={cmicClasses("cta-icon")}>🎓</div>
           <h3 className={cmicClasses("text-subtitulo")}>¿Interesado en nuestros cursos?</h3>
           <p className={cmicClasses("text-normal")}>
@@ -332,11 +332,11 @@ export default function CursosICIC() {
           <div className={cmicClasses("cta-info")}>
             <div className={cmicClasses("info-item")}>
               <span className={cmicClasses("info-icon")}>📧</span>
-              <span>Contacta para más información</span>
+              <span><a href="mailto:cursosicic@cmicags.mx">cursosicic@cmicags.mx</a> | <a href="mailto:capacitacionitc@cmicags.mx">capacitacionitc@cmicags.mx</a></span>
             </div>
             <div className={cmicClasses("info-item")}>
               <span className={cmicClasses("info-icon")}>📞</span>
-              <span>Llama a nuestras oficinas</span>
+              <span><a href="tel:+524491454288">449 145 4288</a> al 93</span>
             </div>
           </div>
         </div>

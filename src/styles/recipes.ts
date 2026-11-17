@@ -3188,8 +3188,8 @@ const recipes: Record<string, string> = {
   ].join(' '),
   // afiliacion2025
   "afi-card-icon": [
-    String.raw`tw:[width:80px] tw:[height:80px] tw:[background:var(--colorFondo)] tw:[border-radius:var(--radius-lg)] tw:flex tw:items-center tw:justify-center tw:[margin-bottom:1.5rem]`,
-    String.raw`tw:[&_img]:[width:48px] tw:[&_img]:[height:48px] tw:[&_img]:object-contain tw:[&_img]:[transform:translateZ(0)] tw:[&_img]:[backface-visibility:hidden] tw:[&_img]:[will-change:transform]`,
+    String.raw`tw:[width:112px] tw:[height:112px] tw:[background:var(--colorFondo)] tw:[border-radius:var(--radius-lg)] tw:flex tw:items-center tw:justify-center tw:[margin-bottom:1.5rem]`,
+    String.raw`tw:[&_img]:[width:88px] tw:[&_img]:[height:88px] tw:[&_img]:object-contain tw:[&_img]:[transform:translateZ(0)] tw:[&_img]:[backface-visibility:hidden] tw:[&_img]:[will-change:transform]`,
     String.raw`tw:max-1024:[&_img]:[width:clamp(88px,12vw,120px)] tw:max-1024:[&_img]:[height:clamp(88px,12vw,120px)] tw:max-1024:shrink-0`,
     String.raw`tw:max-1024:[width:clamp(112px,16vw,152px)] tw:max-1024:[height:clamp(112px,16vw,152px)]`,
   ].join(' '),

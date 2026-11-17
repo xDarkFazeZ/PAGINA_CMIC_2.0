@@ -447,24 +447,36 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* Barrido de color para las acciones del sitio. */
-@media (hover: hover) {
-  main :is(button, a[class*="btn"], a[class*="button"]):not(:disabled) {
+/* El efecto de relleno está reservado a escritorio con puntero y hover. */
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  main :is(button, a[class*="btn"], a[class*="button"]):not(:disabled, .card-link, .icic-email-card, .icic-phone-card, [href^="mailto:"], [href^="tel:"], [aria-label*="correo" i], [aria-label*="teléfono" i]) {
     --action-fill: #720000;
+    background-color: #fff !important;
     background-image: linear-gradient(var(--action-fill), var(--action-fill)) !important;
     background-repeat: no-repeat !important;
     background-position: left center !important;
     background-size: 0% 100% !important;
+    color: #720000 !important;
     transition: background-size .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease !important;
   }
-  main :is(button, a[class*="btn"], a[class*="button"]):is([class*="whatsapp"], [aria-label*="WhatsApp"], [href*="wa.me"]) {
+  main :is(button, a[class*="btn"], a[class*="button"]):is(.whatsapp, .btn-whatsapp, .boton-whatsapp, .cta-whatsapp-btn, .icic-whatsapp-card, [aria-label*="WhatsApp" i], [href*="wa.me"]) {
     --action-fill: #128c4b;
+    color: #111 !important;
   }
-  main :is(button, a[class*="btn"], a[class*="button"]):not(:disabled):hover {
+  main :is(button, a[class*="btn"], a[class*="button"]):not(:disabled, .card-link, .icic-email-card, .icic-phone-card, [href^="mailto:"], [href^="tel:"], [aria-label*="correo" i], [aria-label*="teléfono" i]):hover {
     background-size: 100% 100% !important;
     color: #fff !important;
   }
+  main .icic-whatsapp-card:hover .icic-contact-info :is(h4, p) { color: #fff !important; }
+  .maestria-volver { display: none !important; }
 }
-@media (prefers-reduced-motion: reduce) {
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
   main :is(button, a[class*="btn"], a[class*="button"]) { transition: none !important; }
 }
+
+/* Tipografía de la sección de contacto de cursos ICIC. */
+.cursos-contacto h3 { font-size: clamp(1.7rem, 3vw, 2.1rem); }
+.cursos-contacto p { font-size: clamp(1.05rem, 1.5vw, 1.2rem); }
+.cursos-contacto .cta-whatsapp-btn,
+.cursos-contacto .info-item { font-size: clamp(1rem, 1.3vw, 1.125rem); }
+.cursos-contacto .info-item { overflow-wrap: anywhere; }
