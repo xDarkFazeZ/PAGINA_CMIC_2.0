@@ -300,7 +300,7 @@ function DetalleConvenio({ data }: {data: Convenio}) {
 
       {/* CTA WhatsApp (fijo) */}
       <div className={cmicClasses("ctaRow")}>
-        <button className={cmicClasses("btn btn--primary")} onClick={handleWhatsAppClick}>
+        <button className={cmicClasses("btn btn--primary")} onClick={handleWhatsAppClick} aria-label="Enviar mensaje por WhatsApp">
           Enviar mensaje por WhatsApp
         </button>
       </div>

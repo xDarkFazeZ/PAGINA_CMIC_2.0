@@ -3,6 +3,16 @@
   publish = "dist"
 
 [[redirects]]
+  from = "/afiliacion-2025"
+  to = "/afiliacion-2026"
+  status = 301
+
+[[redirects]]
+  from = "/asociado-estudiantil-2025"
+  to = "/asociado-estudiantil-2026"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

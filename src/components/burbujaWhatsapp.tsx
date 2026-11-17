@@ -2,11 +2,11 @@ import { cmicClasses } from '../styles/recipes';
 import React, { useMemo } from "react";
 /* ========= Utilidad OPTIMIZADA ========= */
 function getPublicWhatsAppNumber() {
-  return import.meta.env.VITE_WHATSAPP_NUMBER;
+  return "+524492039720";
 }
 
 // ✅ CONSTANTES fuera del componente
-const DEFAULT_PHONE = "+5214494401155";
+const DEFAULT_PHONE = "+524492039720";
 const DEFAULT_MESSAGE = "Hola, me gustaría obtener más información de ustedes.";
 const MAX_MESSAGE_LENGTH = 500;
 

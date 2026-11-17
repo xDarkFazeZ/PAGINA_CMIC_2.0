@@ -12,7 +12,7 @@ import cmic from "../lib/cmic.jpg";
 const CONFIG = Object.freeze({
   correoAfiliacion: "afiliacion@cmicags.mx",
   telefono: "+524491454288",
-  whatsapp: "5214494401155",
+  whatsapp: "524492039720",
   title: "Asociado Estudiantil",
   subtitle: "Si cursas Arquitectura, Ingeniería Civil o carrera afín, intégrate a la comunidad universitaria CMIC y aprovecha estos beneficios."
 });
@@ -40,7 +40,7 @@ const useImagePreload = (src: string | null | undefined) => {
 // ✅ Componente ContactButtons
 const ContactButtons = React.memo(function ContactButtons() {
   const handleWhatsAppClick = useCallback(() => {
-    const message = "Hola, me interesa ser *Asociado Estudiantil 2025* de CMIC Aguascalientes. ¿Podrían brindarme más información?";
+    const message = "Hola, me interesa ser *Asociado Estudiantil 2026* de CMIC Aguascalientes. ¿Podrían brindarme más información?";
     const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
 
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -50,7 +50,7 @@ const ContactButtons = React.memo(function ContactButtons() {
   return (
     <div className={cmicClasses("ase-actions")} role="group" aria-label="Opciones de contacto">
       <button
-        className={cmicClasses("btn btn-primary")}
+        className={cmicClasses("btn btn-primary btn-whatsapp")}
         onClick={handleWhatsAppClick}
         aria-label="Contactar por WhatsApp para asociado estudiantil"
         type="button"
@@ -156,7 +156,6 @@ const AsociadoEstudiantil = React.memo(function AsociadoEstudiantil() {
               <p className={cmicClasses("ase-subtitle")} itemProp="description">
                 {safeText(CONFIG.subtitle)}
               </p>
-              <ContactButtons />
             </div>
 
             <figure className={cmicClasses("ase-hero-media")}>

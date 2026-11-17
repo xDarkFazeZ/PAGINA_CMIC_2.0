@@ -131,8 +131,8 @@ const App = () => {
           <Route path="/servicios/asociado-proveedor" element={<Boundary><AsociadoProveedor /></Boundary>} />
 
           {/* Redirecciones temporales */}
-          <Route path="/afiliacion-2025" element={<Boundary><Afiliacion2025 /></Boundary>} />
-          <Route path="/asociado-estudiantil-2025" element={<Boundary><AsociadoEstudiantil2025 /></Boundary>} />
+          <Route path="/afiliacion-2026" element={<Boundary><Afiliacion2025 /></Boundary>} />
+          <Route path="/asociado-estudiantil-2026" element={<Boundary><AsociadoEstudiantil2025 /></Boundary>} />
 
           {/* Otras páginas */}
           <Route path="/icic" element={<Boundary><Icic /></Boundary>} />

@@ -10,6 +10,12 @@ export default {
             validation: Rule => Rule.required()
         },
         {
+            name: 'rvoe',
+            title: 'RVOE',
+            type: 'string',
+            description: 'Número o información del RVOE de esta maestría'
+        },
+        {
             name: 'imagen',
             title: 'Imagen de la Maestría',
             type: 'image',

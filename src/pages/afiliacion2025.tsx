@@ -1,5 +1,5 @@
 import { cmicClasses } from '../styles/recipes';
-// src/pages/afiliacion2025.js
+// src/pages/afiliacion2026.js
 import React, { useCallback, useMemo } from "react";
 // ✅ Preload crítico para imágenes above-the-fold
 import alianzas from "../lib/alianzas.webp";
@@ -16,7 +16,7 @@ import afiliacion from "../lib/afiliacion.jpg";
 const CONFIG = Object.freeze({
   correoAfiliacion: "afiliacion@cmicags.mx",
   telefono: "+524491454288",
-  whatsapp: "5214494401155"
+  whatsapp: "524492039720"
 });
 
 // ✅ Helpers optimizados y seguros
@@ -41,50 +41,22 @@ if (typeof window !== 'undefined') {
 // ✅ Componente de ContactButtons memoizado con handlers optimizados
 const ContactButtons = React.memo(function ContactButtons() {
   const handleWhatsAppClick = useCallback(() => {
-    const message = `Hola, me interesa la *Afiliación 2025* a CMIC Aguascalientes. ¿Podrían brindarme más información?`;
+    const message = `Hola, me interesa la *Afiliación 2026* a CMIC Aguascalientes. ¿Podrían brindarme más información?`;
     const whatsappURL = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappURL, "_blank", "noopener,noreferrer");
   }, []);
 
-  const handleEmail = useCallback(() => {
-    const subject = "Afiliación 2025 - Solicitud de información";
-    const body = "Hola, me interesa la Afiliación 2025 a CMIC Aguascalientes.\n\nNombre:\nEmpresa:\nTeléfono:\n\nGracias.";
-    window.location.href = `mailto:${CONFIG.correoAfiliacion}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }, []);
-
-  const handleCall = useCallback(() => {
-    window.location.href = `tel:${CONFIG.telefono}`;
-  }, []);
-
   return (
     <div className={cmicClasses("afi-actions")} role="group" aria-label="Opciones de contacto">
       <button 
-        className={cmicClasses("btn btn-primary")} 
+        className={cmicClasses("btn btn-primary btn-whatsapp")}
         onClick={handleWhatsAppClick}
         aria-label="Contactar por WhatsApp"
         type="button"
       >
         <span className={cmicClasses("btn-icon")} aria-hidden="true">💬</span>
         Contactar por WhatsApp
-      </button>
-      <button 
-        className={cmicClasses("btn btn-secondary")} 
-        onClick={handleEmail}
-        aria-label="Enviar correo electrónico"
-        type="button"
-      >
-        <span className={cmicClasses("btn-icon")} aria-hidden="true">✉️</span>
-        Enviar correo
-      </button>
-      <button 
-        className={cmicClasses("btn btn-tertiary")} 
-        onClick={handleCall}
-        aria-label="Llamar por teléfono"
-        type="button"
-      >
-        <span className={cmicClasses("btn-icon")} aria-hidden="true">☎️</span>
-        Llamar
       </button>
     </div>
   );
@@ -126,7 +98,7 @@ const BENEFICIOS = Object.freeze([
   }
 ]);
 
-const Afiliacion2025 = React.memo(function Afiliacion2025() {
+const Afiliacion2026 = React.memo(function Afiliacion2026() {
   const title = "¡Afíliate a la CMIC!";
   const subtitle = "Afiliarte a la CMIC tiene grandes beneficios";
 
@@ -163,7 +135,7 @@ const Afiliacion2025 = React.memo(function Afiliacion2025() {
               <div className={cmicClasses("afi-image-container")}>
                 <img
                   src={afiliacion}
-                  alt="Profesional de la construcción revisando planos - Afiliación CMIC 2025"
+                  alt="Profesional de la construcción revisando planos - Afiliación CMIC 2026"
                   loading="eager" // ✅ Cambiado a eager para LCP
                   decoding="sync"
                   className={cmicClasses("afi-hero-image")}
@@ -288,6 +260,6 @@ const Afiliacion2025 = React.memo(function Afiliacion2025() {
   );
 });
 
-Afiliacion2025.displayName = 'Afiliacion2025';
+Afiliacion2026.displayName = 'Afiliacion2026';
 
-export default Afiliacion2025;
+export default Afiliacion2026;

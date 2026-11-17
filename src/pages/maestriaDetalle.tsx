@@ -105,6 +105,7 @@ const validateMaestriaData = (data: Maestria | null) => {
   if (!data || typeof data !== 'object') return null;
   
   return {
+    rvoe: sanitizeInput(data.rvoe, 250),
     nombre_maestria: sanitizeInput(data.nombre_maestria, 160) || "Nombre no disponible",
     imagen: data.imagen || null,
     objetivo_itc: sanitizeInput(data.objetivo_itc, 2000) || "Objetivo no disponible",
@@ -206,7 +207,7 @@ const MaestriaDetalle = () => {
 
       const data = await client.fetch<Maestria | null>(
         `*[_type == "maestrias" && nombre_maestria == $nombre][0]{
-          nombre_maestria,
+          nombre_maestria, rvoe,
           imagen,
           objetivo_itc,
           requisitos,
@@ -296,6 +297,7 @@ const MaestriaDetalle = () => {
           <div className={cmicClasses("hero-columna-izquierda")}>
             <div className={cmicClasses("hero-texto")}>
               <h1 id="hero-heading">{maestria.nombre_maestria}</h1>
+              {maestria.rvoe && <p><strong>RVOE:</strong> {maestria.rvoe}</p>}
               <p className={cmicClasses("objetivo-text")}>{maestria.objetivo_itc}</p>
             </div>
 

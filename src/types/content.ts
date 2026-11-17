@@ -57,7 +57,7 @@ export interface ConvenioLogo { id: string; nombre: string; img: string | null; 
 
 export interface Maestria {
   _id: string; nombre_maestria?: string; imagen?: CmsImage | null;
-  objetivo_itc?: string; requisitos?: string[];
+  objetivo_itc?: string; rvoe?: string; requisitos?: string[];
   descripcion_corta?: string; duracion?: string; slug?: { current?: string };
   mapa_curricular?: { titulo_semestre?: string; materias?: string[] }[];
   detalles_maestria?: {

@@ -18,8 +18,8 @@ const SUBMENU_CONFIG: Record<MenuKey, NavItem[]> = {
   cmic: [
     { to: '/servicios', label: 'Servicios CMIC' },
     { to: '/convenios', label: 'Convenios y beneficios' },
-    { to: '/asociado-estudiantil-2025', label: 'Asociado Estudiantil 2025' },
-    { to: '/afiliacion-2025', label: '¡Afíliate a la CMIC!' },
+    { to: '/asociado-estudiantil-2026', label: 'Asociado Estudiantil 2026' },
+    { to: '/afiliacion-2026', label: '¡Afíliate a la CMIC!' },
     { to: '/servicios/asociado-proveedor', label: 'Asociado Proveedor' },
   ],
   nos: [
@@ -218,7 +218,7 @@ export default function Header() {
   );
 
   return (
-    <header className={cmicClasses(`header ${['/servicios', '/convenios', '/asociado-estudiantil-2025', '/afiliacion-2025'].includes(location.pathname) ? 'header-large-mobile-logo' : ''} ${isScrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`)}>
+    <header className={cmicClasses(`header ${['/servicios', '/convenios', '/asociado-estudiantil-2026', '/afiliacion-2026'].includes(location.pathname) ? 'header-large-mobile-logo' : ''} ${isScrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`)}>
       <div className={cmicClasses("logo-container")}>
         <Link to="/" onClick={handleLinkClick} aria-label="CMIC Aguascalientes — inicio" tabIndex={mobileMenuOpen ? -1 : undefined}>
           <img src={logoImage} alt="CMIC Aguascalientes" className={cmicClasses("logo")} />
@@ -268,7 +268,7 @@ export default function Header() {
         </nav>
         {!isDesktop && (
           <div className={cmicClasses("mobile-panel-footer tw:mt-auto")}>
-            <Link to="/afiliacion-2025" onClick={handleLinkClick} className={cmicClasses("mobile-join d-flex align-items-center justify-content-between")}>
+            <Link to="/afiliacion-2026" onClick={handleLinkClick} className={cmicClasses("mobile-join d-flex align-items-center justify-content-between")}>
               Forma parte de CMIC <FaArrowRight aria-hidden="true" />
             </Link>
             <LogosStrip mobile onLinkClick={handleLinkClick} />

@@ -25,11 +25,11 @@ import trabajo from "../lib/trabajo.webp";
 import empleado from "../lib/profesional.webp";
 import experto from "../lib/experto.webp";
 import presupuesto from "../lib/presupuesto.webp";
-import folletoPDF from "../pdf/servicios-cmic.pdf";
+import folletoPDF from "../pdf/servicios-cmic-2026.pdf";
 
 /* ===================== CONFIG ===================== */
 const CONFIG = Object.freeze({
-  WHATSAPP_NUMBER: "5214494401155",
+  WHATSAPP_NUMBER: "524492039720",
   SCROLL_OFFSET: 96,
   IO_THRESHOLD: 0.1,
   IO_ROOT_MARGIN: "50px 0px",
@@ -349,7 +349,7 @@ export default function ServiciosOptimizado() {
             <div className={cmicClasses("cta-actions")}>
               <a
                 href={folletoPDF}
-                download="Servicios-CMIC-2025.pdf"
+                download="Servicios-CMIC-2026.pdf"
                 className={cmicClasses("btn-cta btn-primary")}
               >
                 📄 Descargar Folleto
